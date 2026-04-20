@@ -4,321 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VAF2DUX - Free 2D Animation Tool</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            background: #0e0e0e;
-            color: #d4d4d4;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            line-height: 1.6;
-        }
-
-        /* ── Nav ── */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(14, 14, 14, 0.92);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid #1f1f1f;
-            z-index: 100;
-            padding: 0 40px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 60px;
-        }
-
-        .nav-logo {
-            font-size: 20px;
-            font-weight: 700;
-            color: #e0b830;
-            letter-spacing: 1px;
-        }
-
-        .nav-links { display: flex; gap: 32px; }
-
-        .nav-links a {
-            color: #888;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
-        .nav-links a:hover { color: #e0b830; }
-
-        /* ── Hero ── */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 120px 24px 80px;
-            background: radial-gradient(ellipse at 50% 0%, rgba(200, 160, 32, 0.08) 0%, transparent 60%);
-        }
-
-        .hero-badge {
-            display: inline-block;
-            padding: 6px 16px;
-            background: rgba(200, 160, 32, 0.12);
-            border: 1px solid rgba(200, 160, 32, 0.25);
-            border-radius: 20px;
-            font-size: 13px;
-            color: #e0b830;
-            font-weight: 500;
-            margin-bottom: 28px;
-        }
-
-        .hero h1 {
-            font-size: clamp(42px, 7vw, 72px);
-            font-weight: 800;
-            color: #fff;
-            line-height: 1.1;
-            margin-bottom: 20px;
-        }
-
-        .hero h1 span { color: #e0b830; }
-
-        .hero p {
-            font-size: 18px;
-            color: #777;
-            max-width: 540px;
-            margin-bottom: 40px;
-        }
-
-        .btn-group { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 32px;
-            border-radius: 8px;
-            font-size: 15px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.2s;
-            cursor: pointer;
-            border: none;
-        }
-
-        .btn-primary {
-            background: #c8a020;
-            color: #0e0e0e;
-        }
-
-        .btn-primary:hover {
-            background: #e0b830;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(200, 160, 32, 0.25);
-        }
-
-        .btn-secondary {
-            background: #1a1a1a;
-            color: #ccc;
-            border: 1px solid #333;
-        }
-
-        .btn-secondary:hover {
-            background: #252525;
-            border-color: #555;
-            transform: translateY(-2px);
-        }
-
-        .btn svg {
-            width: 18px;
-            height: 18px;
-            fill: currentColor;
-        }
-
-        .hero-image {
-            margin-top: 60px;
-            max-width: 960px;
-            width: 100%;
-            border-radius: 12px;
-            border: 1px solid #1f1f1f;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-        }
-
-        /* ── Features ── */
-        .features {
-            padding: 100px 40px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .section-label {
-            font-size: 13px;
-            font-weight: 600;
-            color: #e0b830;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 12px;
-        }
-
-        .section-title {
-            font-size: 36px;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 60px;
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
-        }
-
-        .feature-card {
-            background: #141414;
-            border: 1px solid #1f1f1f;
-            border-radius: 12px;
-            padding: 32px;
-            transition: border-color 0.2s, transform 0.2s;
-        }
-
-        .feature-card:hover {
-            border-color: #333;
-            transform: translateY(-4px);
-        }
-
-        .feature-icon {
-            width: 44px;
-            height: 44px;
-            background: rgba(200, 160, 32, 0.1);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-
-        .feature-icon svg {
-            width: 22px;
-            height: 22px;
-            stroke: #e0b830;
-            fill: none;
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-
-        .feature-card h3 {
-            font-size: 18px;
-            font-weight: 600;
-            color: #eee;
-            margin-bottom: 8px;
-        }
-
-        .feature-card p {
-            font-size: 14px;
-            color: #777;
-            line-height: 1.7;
-        }
-
-        /* ── Screenshots ── */
-        .screenshots {
-            padding: 80px 40px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .screenshot-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 20px;
-        }
-
-        .screenshot-grid img {
-            width: 100%;
-            border-radius: 10px;
-            border: 1px solid #1f1f1f;
-            transition: transform 0.2s;
-        }
-
-        .screenshot-grid img:hover {
-            transform: scale(1.02);
-        }
-
-        /* ── Download ── */
-        .download {
-            padding: 100px 40px;
-            text-align: center;
-            background: radial-gradient(ellipse at 50% 100%, rgba(200, 160, 32, 0.06) 0%, transparent 60%);
-        }
-
-        .download .section-title { margin-bottom: 16px; }
-
-        .download p {
-            color: #666;
-            font-size: 16px;
-            margin-bottom: 40px;
-        }
-
-        .sys-req {
-            display: inline-flex;
-            gap: 32px;
-            background: #141414;
-            border: 1px solid #1f1f1f;
-            border-radius: 10px;
-            padding: 20px 36px;
-            margin-top: 32px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .sys-req div {
-            text-align: left;
-        }
-
-        .sys-req span {
-            display: block;
-            font-size: 11px;
-            color: #555;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 4px;
-        }
-
-        .sys-req strong {
-            color: #aaa;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        /* ── Footer ── */
-        footer {
-            padding: 40px;
-            text-align: center;
-            border-top: 1px solid #1a1a1a;
-        }
-
-        footer p {
-            font-size: 13px;
-            color: #444;
-        }
-
-        footer a {
-            color: #e0b830;
-            text-decoration: none;
-        }
-
-        /* ── Responsive ── */
-        @media (max-width: 640px) {
-            nav { padding: 0 20px; }
-            .features, .screenshots, .download { padding-left: 20px; padding-right: 20px; }
-            .sys-req { flex-direction: column; gap: 16px; }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <nav>
-    <div class="nav-logo">VAF2DUX</div>
+    <div class="nav-logo">VAF2DUX 2</div>
     <div class="nav-links">
         <a href="#features">Features</a>
         <a href="#screenshots">Screenshots</a>
@@ -327,7 +18,7 @@
 </nav>
 
 <section class="hero">
-    <div class="hero-badge">Free to Use</div>
+    <div class="hero-badge">Version 2.0 • Free to Use</div>
     <h1>2D Animation,<br><span>Simplified.</span></h1>
     <p>A free, fast 2D animation tool with bone rigging, keyframe animation, and real-time playback.</p>
     <div class="btn-group">
@@ -337,11 +28,48 @@
         </a>
     </div>
 
-    <img class="hero-image" src="screenshot1.png" alt="VAF2DUX Editor">
+    <img class="hero-image" src="screenshot1.png" alt="VAF2DUX 2 Editor">
 </section>
 
 <section class="features" id="features">
-    <div class="section-label">Features</div>
+    <div class="section-label">What's New in 2.0</div>
+    <h2 class="section-title">Powerful new features.</h2>
+
+    <div class="feature-grid">
+        <div class="feature-card">
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="8" cy="12" r="2"/><circle cx="16" cy="12" r="2"/></svg>
+            </div>
+            <h3>GIF Player & Editor</h3>
+            <p>Built-in GIF player with text overlay support, frame-by-frame editing, and high-quality export with custom FPS and dithering.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            </div>
+            <h3>Motion Blur & Camera Shake</h3>
+            <p>Add cinematic motion blur and dynamic camera shake effects to your animations. Adjustable intensity for both.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <h3>Audio Track Support</h3>
+            <p>Import audio files to sync your animations with sound. Perfect for lip-sync and timing.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><polyline points="23 20 23 14 17 14"/><path d="M20.49 9A9 9 0 005.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 013.51 15"/></svg>
+            </div>
+            <h3>Undo/Redo System</h3>
+            <p>Full undo/redo support for all operations. Never lose your work with comprehensive history tracking.</p>
+        </div>
+    </div>
+
+    <div class="section-label" style="margin-top: 80px;">Core Features</div>
     <h2 class="section-title">Everything you need to animate.</h2>
 
     <div class="feature-grid">
@@ -358,7 +86,7 @@
                 <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             </div>
             <h3>Keyframe Animation</h3>
-            <p>Set keyframes for position, rotation, and scale with smooth interpolation between frames.</p>
+            <p>Set keyframes for position, rotation, and scale with smooth interpolation and multiple easing curves.</p>
         </div>
 
         <div class="feature-card">
@@ -366,7 +94,7 @@
                 <svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg>
             </div>
             <h3>Real-time Playback</h3>
-            <p>Preview your animations at 24fps with play, pause, stop, and loop controls.</p>
+            <p>Preview your animations at customizable FPS with play, pause, stop, and loop controls.</p>
         </div>
 
         <div class="feature-card">
@@ -390,15 +118,7 @@
                 <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             </div>
             <h3>Export Anywhere</h3>
-            <p>Export as MP4 video, PNG sequence, or GIF. Ready for your game, social media, or portfolio.</p>
-        </div>
-
-        <div class="feature-card">
-            <div class="feature-icon">
-                <svg viewBox="0 0 24 24"><ellipse cx="12" cy="14" rx="8" ry="9" stroke-dasharray="3 2" opacity="0.5"/><ellipse cx="12" cy="14" rx="4" ry="5"/><path d="M12 5V2"/></svg>
-            </div>
-            <h3>Onion Skinning</h3>
-            <p>See previous and next frames as faded overlays. Blue for past, red for future. Toggle with one click.</p>
+            <p>Export as MP4 video, PNG sequence, or GIF with customizable quality settings. Ready for your game, social media, or portfolio.</p>
         </div>
 
         <div class="feature-card">
@@ -406,7 +126,7 @@
                 <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
             </div>
             <h3>Project Save/Load</h3>
-            <p>Save your work as .vaf project files. Pick up right where you left off.</p>
+            <p>Save your work as .vaf project files. Pick up right where you left off with full project state preservation.</p>
         </div>
 
         <div class="feature-card">
@@ -414,7 +134,7 @@
                 <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 3v18"/></svg>
             </div>
             <h3>Sprite Import</h3>
-            <p>Import PNG, JPG, WebP, SVG, and more. Bind sprites to bones for character animation.</p>
+            <p>Import PNG, JPG, WebP, SVG, and more. Bind sprites to bones for character animation with automatic binding.</p>
         </div>
     </div>
 </section>
@@ -437,9 +157,9 @@
     <p>Free forever. No account required. No strings attached.</p>
 
     <div class="btn-group">
-        <a href="https://github.com/fsafafsafsaga/no/releases/download/1.0/VAF2DUX-v1.0-Windows.zip" class="btn btn-primary">
+        <a href="https://github.com/fsafafsafsaga/no/releases/download/2.0/VAF2DUX-v2.0-Setup.exe" class="btn btn-primary">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-            Download v1.0 - Windows (64-bit)
+            Download v2.0 - Windows (64-bit)
         </a>
     </div>
 
@@ -447,12 +167,6 @@
         <div>
             <span>OS</span>
             <strong>Windows 10+</strong>
-        </div>
-        <div>
-            <span>Optional</span>
-            <strong>ffmpeg (for export)</strong>
-        </div>
-        <div>
             <span>Size</span>
             <strong>~25 MB</strong>
         </div>
@@ -460,8 +174,9 @@
 </section>
 
 <footer>
-    <p>VAF2DUX by <a href="#">Suplix Software</a></p>
+    <p>VAF2DUX 2 by <a href="#">Suplix Software</a></p>
 </footer>
 
+<script src="script.js"></script>
 </body>
 </html>
